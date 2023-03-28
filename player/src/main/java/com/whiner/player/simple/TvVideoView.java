@@ -176,8 +176,10 @@ public class TvVideoView extends FrameLayout implements IVideoView, IPlayerView.
 
     @Override
     public void destroy() {
-        mTvSpinner.destroy();
-        mTvSpinner = null;
+        if (mTvSpinner != null) {
+            mTvSpinner.destroy();
+            mTvSpinner = null;
+        }
         setPlayerView(null);
         setPlayerControllerView(null);
     }
