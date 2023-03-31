@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="window_bg">#FF222222</color>
+    <color name="window_bg">#FFF5F5F5</color>
 
-    <color name="focus_normal">#4D777777</color>
-    <color name="focus_focused">#FF0091EA</color>
-    <color name="focus_pressed">#FFFFAB00</color>
-    <color name="focus_checked">#FFDD2C00</color>
+    <color name="focus_normal">#26000000</color>
+    <color name="focus_focused">#FF1890FF</color>
+    <color name="focus_tr_focused">#991890FF</color>
+    <color name="focus_pressed">#FFFAAD14</color>
+    <color name="focus_checked">#FF52C41A</color>
+    <color name="focus_selected">#FFFF4D4F</color>
+
+    <color name="title_color">#262626</color>
+    <color name="primary_text_color">#595959</color>
+    <color name="secondary_text_color">#8C8C8C</color>
+
+    <color name="disable_color">#BFBFBF</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

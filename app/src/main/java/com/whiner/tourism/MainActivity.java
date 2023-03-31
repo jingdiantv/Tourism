@@ -1,6 +1,7 @@
 package com.whiner.tourism;
 
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.reflect.TypeToken;
 import com.hjq.permissions.Permission;
@@ -36,12 +37,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected boolean waitPermissionInit() {
-        return true;
+        return false;
     }
 
     @Override
     protected List<String> requestPermissionList() {
-        return Collections.singletonList(Permission.REQUEST_INSTALL_PACKAGES);
+        return null;
     }
 
     @Override
@@ -53,42 +54,51 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void init() {
         TianqiFactory.saveWeatherUrl("https://www.yiketianqi.com/free/day");
         getLifecycle().addObserver(binding.tianqi);
-        //binding.vod.create(false);
-        //binding.vod.setTitle("这里是标题");
-        //binding.vod.play("http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4", false);
-        //binding.vod.play("http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225619/index.m3u8", false);
 
-        CacheModel cacheModel = new CacheModel();
-        cacheModel.setKey("hhh");
-        cacheModel.setType(CacheModel.Type.FIRST_CACHE);
-        cacheModel.setKeep_time(60 * 1000);
-        NetUtils.INSTANCE.get("http:///api/settings/getSettings", cacheModel, new NetUtils.OnListener<NetResult<SettingsBean>>() {
-            @Override
-            public TypeToken<NetResult<SettingsBean>> getTypeToken() {
-                return new TypeToken<NetResult<SettingsBean>>() {
-                };
-            }
 
+        binding.tv111.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onStart(Disposable d) {
-                Log.d(TAG, "onStart: ");
-            }
-
-            @Override
-            public void onSucceeded(NetResult<SettingsBean> data, boolean isCache) {
-                Log.d(TAG, "onSucceeded: " + data + "\n" + isCache);
-            }
-
-            @Override
-            public void onFailed(Exception e) {
-                Log.e(TAG, "onFailed: ", e);
-            }
-
-            @Override
-            public void onEnd() {
-                Log.d(TAG, "onEnd: ");
+            public void onClick(View v) {
+                showLoadingView("sss");
             }
         });
+
+        binding.vod.create(false);
+//        binding.vod.setTitle("这里是标题");
+//        binding.vod.play("http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4", false);
+        //binding.vod.play("http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225619/index.m3u8", false);
+
+//        CacheModel cacheModel = new CacheModel();
+//        cacheModel.setKey("hhh");
+//        cacheModel.setType(CacheModel.Type.FIRST_CACHE);
+//        cacheModel.setKeep_time(60 * 1000);
+//        NetUtils.INSTANCE.get("http:///api/settings/getSettings", cacheModel, new NetUtils.OnListener<NetResult<SettingsBean>>() {
+//            @Override
+//            public TypeToken<NetResult<SettingsBean>> getTypeToken() {
+//                return new TypeToken<NetResult<SettingsBean>>() {
+//                };
+//            }
+//
+//            @Override
+//            public void onStart(Disposable d) {
+//                Log.d(TAG, "onStart: ");
+//            }
+//
+//            @Override
+//            public void onSucceeded(NetResult<SettingsBean> data, boolean isCache) {
+//                Log.d(TAG, "onSucceeded: " + data + "\n" + isCache);
+//            }
+//
+//            @Override
+//            public void onFailed(Exception e) {
+//                Log.e(TAG, "onFailed: ", e);
+//            }
+//
+//            @Override
+//            public void onEnd() {
+//                Log.d(TAG, "onEnd: ");
+//            }
+//        });
 
     }
 
