@@ -5,9 +5,9 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatCheckedTextView;
 
-public class TvButton extends AppCompatTextView {
+public class TvButton extends AppCompatCheckedTextView {
 
     public TvButton(@NonNull Context context) {
         super(context);
