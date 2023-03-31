@@ -25,6 +25,7 @@ import com.hjq.permissions.XXPermissions;
 import com.hjq.toast.Toaster;
 import com.whiner.common.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActivity {
@@ -36,10 +37,6 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
     protected abstract V getBinding();
 
     protected abstract boolean enableBg();
-
-    protected abstract boolean waitPermissionInit();
-
-    protected abstract List<String> requestPermissionList();
 
     protected void setBgUrl(String url) {
         SPUtils.getInstance().put(SP_KEY_ACTIVITY_BG, url);
@@ -246,19 +243,28 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
         super.onBackPressed();
     }
 
-    protected void permissionSuccess() {
+    protected abstract boolean waitPermissionInit();
 
+    protected abstract List<String> requestPermissionList();
+
+    protected void permissionSuccess() {
+        Log.d(TAG, "permissionSuccess: 权限正常");
     }
 
     protected void permissionFail() {
-
+        Log.d(TAG, "permissionFail: 权限异常");
     }
 
     protected void initPermission() {
         if (requestPermissionList() == null) {
             return;
         }
-        XXPermissions.with(this).permission(requestPermissionList()).request((permissions, allGranted) -> {
+        //默认需要网络权限
+        List<String> list = new ArrayList<>();
+        list.add("android.permission.INTERNET");
+        list.addAll(requestPermissionList());
+        XXPermissions.with(this).permission(list).request((permissions, allGranted) -> {
+            Log.d(TAG, "initPermission: " + permissions);
             if (allGranted) {
                 permissionSuccess();
                 if (waitPermissionInit()) {

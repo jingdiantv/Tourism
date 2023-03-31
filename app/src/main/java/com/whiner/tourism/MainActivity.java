@@ -3,6 +3,7 @@ package com.whiner.tourism;
 import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
+import com.hjq.permissions.Permission;
 import com.whiner.common.base.BaseActivity;
 import com.whiner.network.NetUtils;
 import com.whiner.network.base.CacheModel;
@@ -13,6 +14,8 @@ import com.whiner.weather.WeatherBean;
 import com.whiner.weather.tianqi.TianqiFactory;
 import com.whiner.weather.tianqi.TianqiView;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
@@ -33,12 +36,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected boolean waitPermissionInit() {
-        return false;
+        return true;
     }
 
     @Override
     protected List<String> requestPermissionList() {
-        return null;
+        return Collections.singletonList(Permission.REQUEST_INSTALL_PACKAGES);
     }
 
     @Override

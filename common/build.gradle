@@ -5,7 +5,7 @@ plugins {
 
 def groupIdStr = "com.whiner.common"
 def artifactIdStr = "common"
-def versionStr = "1.0"
+def versionStr = "1.3"
 
 android {
     namespace 'com.whiner.common'
