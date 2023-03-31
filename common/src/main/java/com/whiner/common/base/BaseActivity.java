@@ -21,8 +21,11 @@ import com.blankj.utilcode.util.AdaptScreenUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
+import com.hjq.permissions.XXPermissions;
 import com.hjq.toast.Toaster;
 import com.whiner.common.R;
+
+import java.util.List;
 
 public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActivity {
 
@@ -33,6 +36,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
     protected abstract V getBinding();
 
     protected abstract boolean enableBg();
+
+    protected abstract boolean waitPermissionInit();
+
+    protected abstract List<String> requestPermissionList();
 
     protected void setBgUrl(String url) {
         SPUtils.getInstance().put(SP_KEY_ACTIVITY_BG, url);
@@ -196,6 +203,10 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
             setLoadingView(createLoadingView());
         }
         setContentView(binding.getRoot());
+        initPermission();
+        if (waitPermissionInit()) {
+            return;
+        }
         init();
     }
 
@@ -233,6 +244,30 @@ public abstract class BaseActivity<V extends ViewBinding> extends AppCompatActiv
     public void onBackPressed() {
         Log.d(TAG, "onBackPressed: " + this);
         super.onBackPressed();
+    }
+
+    protected void permissionSuccess() {
+
+    }
+
+    protected void permissionFail() {
+
+    }
+
+    protected void initPermission() {
+        if (requestPermissionList() == null) {
+            return;
+        }
+        XXPermissions.with(this).permission(requestPermissionList()).request((permissions, allGranted) -> {
+            if (allGranted) {
+                permissionSuccess();
+                if (waitPermissionInit()) {
+                    init();
+                }
+            } else {
+                permissionFail();
+            }
+        });
     }
 
 }

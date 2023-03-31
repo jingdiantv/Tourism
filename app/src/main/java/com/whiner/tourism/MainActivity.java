@@ -13,6 +13,8 @@ import com.whiner.weather.WeatherBean;
 import com.whiner.weather.tianqi.TianqiFactory;
 import com.whiner.weather.tianqi.TianqiView;
 
+import java.util.List;
+
 import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
@@ -27,6 +29,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     protected boolean enableBg() {
         return true;
+    }
+
+    @Override
+    protected boolean waitPermissionInit() {
+        return false;
+    }
+
+    @Override
+    protected List<String> requestPermissionList() {
+        return null;
     }
 
     @Override
